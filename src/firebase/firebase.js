@@ -16,5 +16,17 @@ firebase
   .database()
   .ref()
   .set({
-    name: "Shock"
+    name: "Shock",
+    age: 30,
+    isSingle: false,
+    location: {
+      city: "Taichung",
+      country: "Taiwan"
+    }
+  })
+  .then(() => {
+    console.log("Data is saved");
+  })
+  .catch(e => {
+    console.log("This failed.", e);
   });
