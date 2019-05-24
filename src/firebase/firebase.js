@@ -12,21 +12,35 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-firebase
-  .database()
+const database = firebase.database();
+
+// database
+//   .ref()
+//   .set({
+//     name: "Shock",
+//     age: 30,
+//     isSingle: false,
+//     location: {
+//       city: "Taichung",
+//       country: "Taiwan"
+//     }
+//   })
+//   .then(() => {
+//     console.log("Data is saved");
+//   })
+//   .catch(e => {
+//     console.log("This failed.", e);
+//   });
+
+database.ref('isSingle').set(null);
+
+database
+  // .ref("isSingle")
   .ref()
-  .set({
-    name: "Shock",
-    age: 30,
-    isSingle: false,
-    location: {
-      city: "Taichung",
-      country: "Taiwan"
-    }
-  })
+  .remove()
   .then(() => {
-    console.log("Data is saved");
+    console.log("data was removed");
   })
   .catch(e => {
-    console.log("This failed.", e);
+    console.log("Did not remove data", e);
   });
