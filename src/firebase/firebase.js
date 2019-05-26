@@ -14,24 +14,74 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-database.ref('expenses').push({
-  description: 'Rent',
-  note: '',
-  amount: 111000,
-  createdAt: 97930023985
+// child_removed
+database.ref("expenses").on("child_removed", snapshot => {
+  console.log(snapshot.key, snapshot.val());
 });
-database.ref('expenses').push({
-  description: 'Water bill',
-  note: '',
-  amount: 6000,
-  createdAt: 981243543253
+
+// child_changed
+database.ref("expenses").on("child_changed", snapshot => {
+  console.log(snapshot.key, snapshot.val());
 });
-database.ref('expenses').push({
-  description: 'phone bill',
-  note: '',
-  amount: 70000,
-  createdAt: 983404738974
+
+// child_added
+database.ref("expenses").on("child_added", snapshot => {
+  console.log(snapshot.key, snapshot.val());
 });
+
+// database
+//   .ref("expenses")
+//   .once("value")
+//   .then(snapshot => {
+//     const expenses = [];
+
+//     snapshot.forEach(childSnapshot => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val()
+//       });
+//     });
+
+//     console.log(expenses);
+//   });
+
+// database.ref("expenses").on(
+//   "value",
+//   snapshot => {
+//     const expenses = [];
+
+//     snapshot.forEach(childSnapshot => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val()
+//       });
+//     });
+
+//     console.log(expenses);
+//   },
+//   e => {
+//     console.log("fetching array data failed", e);
+//   }
+// );
+
+// database.ref('expenses').push({
+//   description: 'Rent',
+//   note: '',
+//   amount: 111000,
+//   createdAt: 97930023985
+// });
+// database.ref('expenses').push({
+//   description: 'Water bill',
+//   note: '',
+//   amount: 6000,
+//   createdAt: 981243543253
+// });
+// database.ref('expenses').push({
+//   description: 'phone bill',
+//   note: '',
+//   amount: 70000,
+//   createdAt: 983404738974
+// });
 
 // database.ref("notes").push({
 //   title: "To do 2",
